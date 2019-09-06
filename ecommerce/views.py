@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, get_user_model
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .forms import contactForm, loginForm, signup
@@ -30,28 +30,38 @@ def contact_us(request):
     return render(request, 'contact.html', context)
 
 def login_page(request):
-    loginform = loginForm(request.POST or None)
+    form = loginForm(request.POST or None)
     context = {
-    'form':loginform
+    'form':form
     }
 
-    if loginform.is_valid():
-        username = loginform.cleaned_data.get('username')
-        password = loginform.cleaned_data.get('password')
-        user = authenticate(request, username=username, passwprd=password)
+    if form.is_valid():
+        username = form.cleaned_data.get("username")
+        password = form.cleaned_data.get("password")
+        user = authenticate(request, username=username, password=password)
         if user is not  None:
             login(request, user)
-            return redirect('login/')
+            context['form'] = loginForm
+            return redirect("/login")
         else:
-            print ('error')
-
-        context['form'] = loginForm
+            print ('Error')
 
     return render(request, 'auth/login.html', context)
 
+user = get_user_model()
 def signup_page(request):
     signup_ = signup(request.POST or None)
     context = {
     'form':signup_
     }
+    if signup_.is_valid():
+        first_name = signup_.cleaned_data.get("firstname")
+        last_name = signup_.cleaned_data.get("lastname")
+        username = signup_.cleaned_data.get("username")
+        email = signup_.cleaned_data.get("email")
+        password = signup_.cleaned_data.get("password")
+        extra_fields = {'first_name':first_name, 'last_name':last_name}
+        new_user = user.objects.create_user(username, email, password, **extra_fields)
+
+        context['form'] = signup
     return render(request, 'auth/signup.html', context)

@@ -1,3 +1,4 @@
+{% extends 'base.html'%}
 <!doctype html>
 <html lang="en">
   <head>
@@ -11,6 +12,7 @@
     <title>leosoft-uganda</title>
   </head>
   <body>
+    {% block content %}
     <div class="container">
       <h1>leosoft uganda</h1>
     </div>
@@ -30,6 +32,8 @@
       </div>
 
       </div>
+
+      {% endblock %}
 
 
     <!-- Optional JavaScript -->
