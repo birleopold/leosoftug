@@ -1,88 +1,182 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title></title>
+    <title>Leosoft Uganda {% block title %}
+    {% endblock %}</title>
+
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all" />
+    <!--theme-style-->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" media="all" />
+    <link rel="stylesheet" href="{% static 'css/etalage.css' %}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{% static 'css/form.css' %}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" type="text/css" media="all" />
+    <!--//theme-style-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!--fonts-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <!--//fonts-->
+    <script src="{%static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/jquery.etalage.min.js' %}"></script>
+    <script src="{% static 'js/jquery.flexisel.js' %}"></script>
+    <script src="{% static 'js/jquery.wmuSlider.js' %}"></script>
+    <script>
+    			jQuery(document).ready(function($){
+
+    				$('#etalage').etalage({
+    					thumb_image_width: 300,
+    					thumb_image_height: 400,
+    					source_image_width: 900,
+    					source_image_height: 1200,
+    					show_hint: true,
+    					click_callback: function(image_anchor, instance_id){
+    						alert('Callback example:\nYou clicked on an image with the anchor: "'+image_anchor+'"\n(in Etalage instance: "'+instance_id+'")');
+    					}
+    				});
+
+    			});
+    		</script>
   </head>
-
   <body>
-  
-    <nav class="navbar navbar-expand-lg navbar-light bg-primary">
-  <a class="navbar-brand" href="{% url 'home'%}">leosoft</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+    <div class="header">
+      <div class="top-header">
+        <div class="container">
+          <div class="top-header-left">
+            <ul class="support">
+              <li><a href="#"><label> </label></a></li>
+              <li><a href="#">24x7 live<span class="live"> support</span></a></li>
+            </ul>
+            <ul class="support">
+              <li class="van"><a href="#"><label> </label></a></li>
+              <li><a href="#">Free shipping <span class="live">on order over 500</span></a></li>
+            </ul>
+            <div class="clearfix"> </div>
+          </div>
+          <div class="top-header-right">
+            <div class="down-top">
+                <select class="in-drop">
+                  <option value="English" class="in-of">English</option>
+                  <option value="Japanese" class="in-of">Luganda</option>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'home'%}">Home <span class="sr-only">(current)</span></a>
-      </li>
+                </select>
+             </div>
+            <div class="down-top top-down">
+                <select class="in-drop">
 
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          products
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+                <option value="Dollar" class="in-of">UGX</option>
+                <option value="Yen" class="in-of">USD</option>
+
+                </select>
+             </div>
+            <div class="clearfix"> </div>
+          </div>
+          <div class="clearfix"> </div>
         </div>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          services
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+      </div>
+      <div class="bottom-header">
+        <div class="container">
+          <div class="header-bottom-left">
+            <div class="logo">
+              <a href="{% url 'home' %}"><img src="{% static 'images/logo.png' %}" alt=" " /></a>
+            </div>
+            <div class="search">
+              <input type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" >
+              <input type="submit"  value="SEARCH">
+
+            </div>
+            <div class="clearfix"> </div>
+          </div>
+          <div class="header-bottom-right">
+              <div class="account"><a href="{% url 'register' %}"><span> </span>YOUR ACCOUNT</a></div>
+                <ul class="login">
+                  <li><a href="{% url 'login' %}"><span> </span>LOGIN</a></li> |
+                  <li ><a href="{% url 'register' %}">SIGNUP</a></li>
+                </ul>
+              <div class="cart"><a href="#"><span> </span>CART</a></div>
+            <div class="clearfix"> </div>
+          </div>
+          <div class="clearfix"> </div>
         </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'about'%}">reviews</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'about'%}">feedback</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'about'%}">about</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'contact'%}">contact</a>
-      </li>
-    </ul>
-    <a class="btn btn-outline-primary" href="{% url 'register'%}">Sign up</a>
-    <a class="btn btn-outline-primary" href="{% url 'login'%}">login</a>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </div>
-</nav>
+      </div>
+    </div>
+    {% block content %}
+    {% endblock %}
+
+    <div class="footer">
+    	<div class="footer-top">
+    		<div class="container">
+    			<div class="latter">
+    				<h6>NEWS-LETTER</h6>
+    				<div class="sub-left-right">
+    					<form>
+    						<input type="text" value="Enter email here"onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter email here';}" />
+    						<input type="submit" value="SUBSCRIBE" />
+    					</form>
+    				</div>
+    				<div class="clearfix"> </div>
+    			</div>
+    			<div class="latter-right">
+    				<p>FOLLOW US</p>
+    				<ul class="face-in-to">
+    					<li><a href="#"><span> </span></a></li>
+    					<li><a href="https://www.facebook.com/leosoftug"><span class="facebook-in"> </span></a></li>
+    					<div class="clearfix"> </div>
+    				</ul>
+    				<div class="clearfix"> </div>
+    			</div>
+    			<div class="clearfix"> </div>
+    		</div>
+    	</div>
+    	<div class="footer-bottom">
+    		<div class="container">
+    			<div class="footer-bottom-cate">
+    				<h6>CATEGORIES</h6>
+    				<ul>
+    					<li><a href="#">Curabitur sapien</a></li>
+    					<li><a href="#">Dignissim purus</a></li>
+    					<li><a href="#">Tempus pretium</a></li>
+
+    			</ul>
+    			</div>
+    			<div class="footer-bottom-cate bottom-grid-cat">
+    				<h6>FEATURE PROJECTS</h6>
+    				<ul>
+    					<li><a href="#">Curabitur sapien</a></li>
+    					<li><a href="#">Dignissim purus</a></li>
+    					<li><a href="#">Tempus pretium</a></li>
+    					<li ><a href="#">Dignissim neque</a></li>
+    					<li ><a href="#">Ornared id aliquet</a></li>
+
+    				</ul>
+    			</div>
+    			<div class="footer-bottom-cate">
+    				<h6>TOP BRANDS</h6>
+    				<ul>
+    					<li><a href="#">Curabitur sapien</a></li>
+    					<li><a href="#">Dignissim purus</a></li>
+    					<li><a href="#">Tempus pretium</a></li>
 
 
-{% block content %}
+    				</ul>
+    			</div>
+    			<div class="footer-bottom-cate cate-bottom">
+    				<h6>OUR ADDERSS</h6>
+    				<ul>
+    					<li>Kampala road. </li>
+    					<li>suncity Arcade</li>
+    					<li> next to Fidodido.</li>
+    					<li >Kampala</li>
+    					<li >Uganda</li>
+    					<li class="phone">PHONE  : +256706488229</li>
+    					<li class="temp"> <p class="footer-class">Design by <a href="https://www.facebook.com/leosoftug" target="_blank">leosoftug</a> </p></li>
+    				</ul>
+    			</div>
+    			<div class="clearfix"> </div>
+    		</div>
+    	</div>
+    </div>
 
-
-{% endblock %}
-
-
-
-
-
-
-
-
-
-
-
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   </body>
 </html>

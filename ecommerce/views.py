@@ -1,13 +1,11 @@
-from django.contrib.auth import authenticate, login, get_user_model
+from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .forms import contactForm, loginForm, signup
 
 def home_page(request):
-    context = {'title':'Welcome to the our site',
-    'content':'welcome enjoy browsing the site'
-    }
-    return render(request, 'home.html', context)
+
+    return render(request, 'index.html')
 
 
 def about_us(request):
@@ -65,3 +63,6 @@ def signup_page(request):
 
         context['form'] = signup
     return render(request, 'auth/signup.html', context)
+
+def logout_page(request):
+    logout(request)
